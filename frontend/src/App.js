@@ -1,7 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import { Endpoints } from './constants';
 
-function App() {
+export const App = () => {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(Endpoints.SUBJECT_DATA)
+        .then(resp => resp.json())
+        .then(console.log)
+  }, [])
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,5 +33,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
