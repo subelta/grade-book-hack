@@ -1,9 +1,10 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, condecimal
 from typing import List
 
 
 class ViewStudent(BaseModel):
     user_id: str
+    grade: float
 
     class Config:
         orm_mode = True
