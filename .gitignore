@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+__pycache__
+venv
+.build
+*.env
+.venv
+.envrc
+.tox
+*.backup
+.pytest_cache
+*.tgz
