@@ -53,7 +53,7 @@ class Student:
                 "user_id": user_id,
                 "dates": dates
             })
-            return data
+        return data
 
 
 
