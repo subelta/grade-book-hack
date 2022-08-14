@@ -5,16 +5,23 @@ import './StudentChart.css';
 import { SUBJECTS } from '../../../constants';
 
 export const StudentChart = (props) => {
-	const { currentStudent, students } = props;
+	const { student } = props;
 
 	const [zoomDomain, setZoomDomain] = useState();
 
 	const handleZoom = useCallback(domain => {
 		setZoomDomain(domain);
-	}, [])
+	}, []);
+
+	const subjects = Object.keys(SUBJECTS);
 
 	return (
 		<div className={"chartWrapper"}>
+			<div className={"legend"}>
+
+				<div>
+				</div>
+			</div>
 			<VictoryChart
 				style={{
 					parent: { height: "calc(100vh - 40px - 80px - 140px)", width: "100%" }
@@ -36,8 +43,7 @@ export const StudentChart = (props) => {
 						`${(new Date(x)).toLocaleDateString('de-DE', { year: 'numeric', month: 'numeric', day: 'numeric' })}`
 					}
 				/>
-				{students
-					.find(el => el.user === currentStudent)
+				{student
 					.subjects
 					.map(subject => (
 						<VictoryLine
@@ -61,8 +67,7 @@ export const StudentChart = (props) => {
 					))
 				}
 
-				{students
-					.find(el => el.user === currentStudent)
+				{student
 					.subjects
 					.map(subject => (
 						<VictoryScatter

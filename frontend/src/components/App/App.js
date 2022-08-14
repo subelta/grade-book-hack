@@ -76,8 +76,7 @@ export const App = () => {
                             ))}
                         </ul>
                         <StudentChart
-                            currentStudent={currentStudent}
-                            students={students}
+                            student={students.find(el => el.user === currentStudent)}
                         />
                     </>
                 )}
