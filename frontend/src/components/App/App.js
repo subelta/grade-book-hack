@@ -1,13 +1,19 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 import './App.css';
-import { COLORS, Endpoints, subjectsDataMock } from '../../constants';
+import { SUBJECTS, Endpoints, subjectsDataMock } from '../../constants';
 import { SubjectsChart } from './SubjectsChart/SubjectsChart';
 
 export const App = () => {
 
     const [students, setStudents] = useState(null);
     const [currentStudent, setCurrentStudent] = useState('');
+    const [tab, setTab] = useState(null);
 
     useEffect(() => {
         fetch(Endpoints.SUBJECTS_DATA)
@@ -23,59 +29,67 @@ export const App = () => {
         setCurrentStudent(student);
     }, [])
 
+    const handleTabClick = useCallback(e => {
+        const subject = e.target.getAttribute("data-subject");
+        if (tab === subject) {
+            setTab(null);
+        } else {
+            setTab(subject);
+        }
+    }, [tab])
     console.log(students);
 
-    return (
-        <div className={"container"}>
-            <header>
-                <h1 className={"heading"}>
-                    11"А"
-                </h1>
-            </header>
+    const subjects = Object.keys(SUBJECTS);
 
-            {!!students && (
-                <>
-                    <nav className={"tabs"}>
-                        <button className={"subjectBtn"}>
-                            Русский язык
+    return (
+        !!students ? (
+            <div className={"container"}>
+                <header>
+                    <h1 className={"heading"}>
+                        11"А"
+                    </h1>
+                </header>
+                <nav className={"tabs"}>
+                    {subjects.map(subject => (
+                        <button
+                            className={`subjectBtn ${tab === subject ? 'selected' : ''}`}
+                            key={subject}
+                            data-subject={subject}
+                            onClick={handleTabClick}
+                        >
+                            {subject}
                         </button>
-                        <button className={"subjectBtn"}>
-                            Физика
-                        </button>
-                        <button className={"subjectBtn"}>
-                            Алгебра
-                        </button>
-                        <button className={"subjectBtn"}>
-                            Английский язык
-                        </button>
-                        <button className={"subjectBtn"}>
-                            Геометрия
-                        </button>
-                        <button className={"subjectBtn"}>
-                            Астрономия
-                        </button>
-                    </nav>
-                    <ul className={"sidebar"}>
-                        {students.map((student, i) => (
-                            <li key={student.user}>
-                                <button
-                                    className={`studentBtn ${currentStudent === student.user ? 'selected' : ''}`}
-                                    data-student={student.user}
-                                    onClick={handleClick}
-                                >
-                                    {student.user}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className={"chartWrapper"}>
-                        <SubjectsChart
-                            currentStudent={currentStudent}
-                            students={students}
-                        />
-                    </div>
-                </>
-            )}
-        </div>
+                    ))}
+                </nav>
+
+                {!tab && (
+                    <>
+                        <ul className={"sidebar"}>
+                            {students.map((student, i) => (
+                                <li key={student.user}>
+                                    <button
+                                        className={`studentBtn ${currentStudent === student.user ? 'selected' : ''}`}
+                                        data-student={student.user}
+                                        onClick={handleClick}
+                                    >
+                                        {student.user}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className={"chartWrapper"}>
+                            <SubjectsChart
+                                currentStudent={currentStudent}
+                                students={students}
+                            />
+                        </div>
+                    </>
+                )}
+
+                {!!tab && (
+                    <div/>
+                )}
+            </div>
+        ) : null
     );
 }

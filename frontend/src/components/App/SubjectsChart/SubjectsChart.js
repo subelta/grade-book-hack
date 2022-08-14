@@ -4,7 +4,7 @@ import { Fragment, useCallback, useEffect, useState } from 'react';
 import { VictoryAxis, VictoryChart, VictoryLine, VictoryScatter, VictoryZoomContainer } from 'victory';
 
 import './SubjectsChart.css';
-import { COLORS } from '../../../constants';
+import { SUBJECTS } from '../../../constants';
 
 export const SubjectsChart = (props) => {
 	const { currentStudent, students } = props;
@@ -53,10 +53,10 @@ export const SubjectsChart = (props) => {
 							))}
 							style={{
 								data: {
-									stroke: COLORS[subject.subj_name],
+									stroke: SUBJECTS[subject.subj_name],
 									strokeWidth: ({ active }) => active ? 2 : 1
 								},
-								labels: { fill: COLORS[subject.subj_name] }
+								labels: { fill: SUBJECTS[subject.subj_name] }
 							}}
 						/>
 					))
@@ -77,7 +77,7 @@ export const SubjectsChart = (props) => {
 									}
 							))}
 							size={2}
-							style={{ data: { fill: COLORS[subject.subj_name] } }}
+							style={{ data: { fill: SUBJECTS[subject.subj_name] } }}
 						/>
 					))
 				}

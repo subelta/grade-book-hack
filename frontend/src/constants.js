@@ -3,7 +3,7 @@ export const Endpoints = {
 	SUBJECTS: 'http://54.218.67.133/subjects',
 };
 
-export const COLORS = {
+export const SUBJECTS = {
 	"Русский язык": "blue",
 	"Физика": "red",
 	"Алгебра": "cyan",
