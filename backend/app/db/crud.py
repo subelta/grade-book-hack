@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, text
 
 from . import models, schemas
 
@@ -136,3 +136,29 @@ class Subject:
             })
         return data
 
+    @staticmethod
+    def get_subject_recommendations(session: Session, subject):
+        """ Return list of themes with less grade.
+        """
+        themes = session.query(models.Grade.date, func.COUNT(models.Grade.id).label("count")).filter(
+            models.Grade.classroom == subject,
+            models.Grade.grade <= 3
+        ).group_by(models.Grade.date).order_by(text("count desc")).all()
+        lessons = session.query(models.Lesson.date, models.Lesson.theme).filter(
+            models.Lesson.classroom == subject,
+        ).order_by(models.Lesson.date).all()
+        _dates = [l.date for l in lessons]
+        _themes = [l.theme for l in lessons]
+        lessons_dict = dict(zip(_dates[1:], _themes[:-1]))
+
+        recs = []
+        for theme in themes:
+            if theme.date in lessons_dict:
+                recs.append({
+                    "date": theme.date,
+                    "theme": lessons_dict[theme.date],
+                    "score": theme.count
+                })
+                if len(recs) == 5:
+                    return recs
+        return recs

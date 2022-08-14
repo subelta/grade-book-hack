@@ -43,3 +43,10 @@ def get_subjects_data(session: Session = Depends(get_session)):
         raise HTTPException(status_code=404, detail="Empty list")
     return subjects
 
+
+@router.get("/recommendations")
+def get_subject_recommendations(subject: str, session: Session = Depends(get_session)):
+    recommendations = crud.Subject.get_subject_recommendations(session, subject)
+    if not recommendations:
+        raise HTTPException(status_code=404, detail="Not recommendations")
+    return recommendations
