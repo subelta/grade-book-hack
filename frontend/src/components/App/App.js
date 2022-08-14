@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from 'react';
 
 import './App.css';
 import { SUBJECTS, Endpoints, subjectsDataMock } from '../../constants';
-import { SubjectsChart } from './SubjectsChart/SubjectsChart';
+import { StudentChart } from './StudentChart/StudentChart';
 
 export const App = () => {
 
@@ -72,17 +72,15 @@ export const App = () => {
                                 </li>
                             ))}
                         </ul>
-                        <div className={"chartWrapper"}>
-                            <SubjectsChart
-                                currentStudent={currentStudent}
-                                students={students}
-                            />
-                        </div>
+                        <StudentChart
+                            currentStudent={currentStudent}
+                            students={students}
+                        />
                     </>
                 )}
 
                 {!!tab && (
-                    <div/>
+                    <div className={"subjectChartWrapper"}/>
                 )}
             </div>
         ) : null

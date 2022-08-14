@@ -3,10 +3,10 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { VictoryAxis, VictoryChart, VictoryLine, VictoryScatter, VictoryZoomContainer } from 'victory';
 
-import './SubjectsChart.css';
+import './StudentChart.css';
 import { SUBJECTS } from '../../../constants';
 
-export const SubjectsChart = (props) => {
+export const StudentChart = (props) => {
 	const { currentStudent, students } = props;
 
 	const [zoomDomain, setZoomDomain] = useState();
