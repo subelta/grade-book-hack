@@ -9,44 +9,48 @@ export const SubjectsChart = (props) => {
 	const { currentStudent, students } = props;
 
 	return (
-		<VictoryChart>
+		<VictoryChart
+			style={{
+				parent: { height: "calc(100vh - 20px - 80px - 170px)", width: "100%" }
+			}}
+		>
 			{students
-				.find(el => el.name === currentStudent)
+				.find(el => el.user === currentStudent)
 				.subjects
 				.map(subject => (
 					<VictoryLine
-						key={subject.subjectName}
+						key={subject.subj_name}
 						data={subject.dates.map(day => (
 							{
 								x: new Date(day.date),
-								y: day.grades[day.grades.length - 1] || null
+								y: day.grade || null
 							}
 						))}
 						style={{
 							data: {
-								stroke: COLORS[subject.subjectName],
+								stroke: COLORS[subject.subj_name],
 								strokeWidth: ({ active }) => active ? 4 : 2
 							},
-							labels: { fill: COLORS[subject.subjectName] }
+							labels: { fill: COLORS[subject.subj_name] }
 						}}
 					/>
 				))
 			}
 
 			{students
-				.find(el => el.name === currentStudent)
+				.find(el => el.user === currentStudent)
 				.subjects
 				.map(subject => (
 					<VictoryScatter
-						key={subject.subjectName}
+						key={subject.subj_name}
 						data={subject.dates.map(day => (
 							{
 								x: new Date(day.date),
-								y: day.grades[day.grades.length - 1] || null
+								y: day.grade || null
 							}
 						))}
 						size={3}
-						style={{ data: { fill: COLORS[subject.subjectName] } }}
+						style={{ data: { fill: COLORS[subject.subj_name] } }}
 					/>
 				))
 			}

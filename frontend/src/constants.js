@@ -1,10 +1,15 @@
 export const Endpoints = {
-	SUBJECT_DATA: 'http://54.218.67.133/subject/data',
+	SUBJECTS_DATA: 'http://54.218.67.133/subjects/data',
+	SUBJECTS: 'http://54.218.67.133/subjects',
 };
 
 export const COLORS = {
 	"Русский язык": "blue",
 	"Физика": "red",
+	"Алгебра": "cyan",
+	"Английский язык": "green",
+	"Геометрия": "purple",
+	"Астрономия": "magenta",
 }
 
 export const subjectsDataMock = [
@@ -17,27 +22,27 @@ export const subjectsDataMock = [
 					{
 						absent: false,
 						date: "2021-09-04",
-						grades: [4]
+						grade: 4
 					},
 					{
 						absent: false,
 						date: "2021-09-10",
-						grades: [2,3]
+						grade: 3
 					},
 					{
 						absent: false,
 						date: "2021-09-13",
-						grades: []
+						grade: null
 					},
 					{
 						absent: true,
 						date: "2021-09-15",
-						grades: []
+						grade: null
 					},
 					{
 						absent: false,
 						date: "2021-09-16",
-						grades: [5]
+						grade: 5
 					}
 				]
 			}
@@ -52,17 +57,17 @@ export const subjectsDataMock = [
 					{
 						absent: false,
 						date: "2021-09-04",
-						grades: [4]
+						grade: 4
 					},
 					{
 						absent: false,
 						date: "2021-09-10",
-						grades: [2,3]
+						grade: 3
 					},
 					{
 						absent: false,
 						date: "2021-09-13",
-						grades: []
+						grade: null
 					},
 					{
 						absent: true,
