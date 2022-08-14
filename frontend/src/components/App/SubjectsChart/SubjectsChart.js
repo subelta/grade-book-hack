@@ -1,18 +1,32 @@
 // STFU BITCH YOU MOTHERFUCKING SHIT
 // noinspection JSValidateTypes
 
-import { VictoryChart, VictoryLine, VictoryScatter } from 'victory';
+import { Fragment, useCallback, useEffect, useState } from 'react';
+import { VictoryChart, VictoryLine, VictoryScatter, VictoryZoomContainer } from 'victory';
 
 import { COLORS } from '../../../constants';
 
 export const SubjectsChart = (props) => {
 	const { currentStudent, students } = props;
 
+	const [zoomDomain, setZoomDomain] = useState();
+
+	const handleZoom = useCallback(domain => {
+		setZoomDomain(domain);
+	}, [])
+
 	return (
 		<VictoryChart
 			style={{
 				parent: { height: "calc(100vh - 20px - 80px - 170px)", width: "100%" }
 			}}
+			containerComponent={
+				<VictoryZoomContainer
+					zoomDimension={"x"}
+					zoomDomain={zoomDomain}
+					onZoomDomainChange={handleZoom}
+				/>
+			}
 		>
 			{students
 				.find(el => el.user === currentStudent)
