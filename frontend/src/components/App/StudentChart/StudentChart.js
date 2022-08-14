@@ -71,6 +71,7 @@ export const StudentChart = (props) => {
 				/>
 				{student
 					.subjects
+					.filter(subject => selectedSubjects.includes(subject.subj_name))
 					.map(subject => (
 						<VictoryLine
 							key={subject.subj_name}
@@ -95,6 +96,7 @@ export const StudentChart = (props) => {
 
 				{student
 					.subjects
+					.filter(subject => selectedSubjects.includes(subject.subj_name))
 					.map(subject => (
 						<VictoryScatter
 							key={subject.subj_name}
