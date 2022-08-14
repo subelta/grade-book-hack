@@ -1,6 +1,8 @@
-import './App.css';
 import { useCallback, useEffect, useState } from 'react';
-import { Endpoints, subjectsDataMock } from '../../constants';
+import { VictoryLine, VictoryChart } from 'victory';
+
+import './App.css';
+import { COLORS, Endpoints, subjectsDataMock } from '../../constants';
 
 export const App = () => {
 
@@ -38,7 +40,32 @@ export const App = () => {
                 ))}
             </ul>
             <div className={"chartWrapper"}>
-
+                <VictoryChart
+                    // scale={{ x: "time" }}
+                >
+                    {students
+                        .find(el => el.name === currentStudent)
+                        .subjects
+                        .map(subject => (
+                            <VictoryLine
+                                key={subject.subjectName}
+                                data={subject.dates.map(day => (
+                                    {
+                                        x: day.date,
+                                        y: day.grades[day.grades.length - 1] || null
+                                    }
+                                ))}
+                                style={{
+                                    data: {
+                                        stroke: COLORS[subject.subjectName],
+                                        strokeWidth: ({ active }) => active ? 4 : 2
+                                    },
+                                    labels: { fill: COLORS[subject.subjectName] }
+                                }}
+                            />
+                        ))
+                    }
+                </VictoryChart>
             </div>
         </div>
     );

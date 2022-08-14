@@ -2,6 +2,11 @@ export const Endpoints = {
 	SUBJECT_DATA: 'http://54.218.67.133/subject/data',
 };
 
+export const COLORS = {
+	"Русский язык": "blue",
+	"Физика": "red",
+}
+
 export const subjectsDataMock = [
 	{
 		name: "Вася",
