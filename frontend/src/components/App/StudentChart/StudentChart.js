@@ -13,14 +13,17 @@ export const StudentChart = (props) => {
 		setZoomDomain(domain);
 	}, []);
 
-	const subjects = Object.keys(SUBJECTS);
+	const subjects = student.subjects.map(el => el.subj_name);
 
 	return (
 		<div className={"chartWrapper"}>
 			<div className={"legend"}>
-
-				<div>
-				</div>
+				{subjects.map(subj => (
+					<div className={"legendElement"} key={subj}>
+						<div className={"colorBox"} style={{ background: SUBJECTS[subj] }}/>
+						<div className={"text"}>{subj}</div>
+					</div>
+				))}
 			</div>
 			<VictoryChart
 				style={{
