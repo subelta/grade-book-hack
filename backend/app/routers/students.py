@@ -6,8 +6,8 @@ from app.db import schemas, crud
 from ..dependencies import get_session
 
 router = APIRouter(
-    prefix="/subject",
-    tags=["subject"],
+    prefix="/students",
+    tags=["students"],
     responses={404: {"description": "Not found"}}
 )
 
