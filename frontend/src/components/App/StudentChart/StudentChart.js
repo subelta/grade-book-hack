@@ -7,22 +7,45 @@ import { SUBJECTS } from '../../../constants';
 export const StudentChart = (props) => {
 	const { student } = props;
 
+	const subjects = student.subjects.map(el => el.subj_name);
+
 	const [zoomDomain, setZoomDomain] = useState();
+	const [selectedSubjects, setSelectedSubjects] = useState(subjects)
 
 	const handleZoom = useCallback(domain => {
 		setZoomDomain(domain);
 	}, []);
 
-	const subjects = student.subjects.map(el => el.subj_name);
+	const handleSelectSubj = useCallback(e => {
+		const subject = e.target.getAttribute("data-legend-subject");
+
+		const found = selectedSubjects.indexOf(subject);
+		if (found !== -1) {
+			const copy = selectedSubjects.slice();
+			copy.splice(found, 1);
+			setSelectedSubjects(copy);
+		} else {
+			const newArr = selectedSubjects.slice();
+			newArr.push(subject);
+			setSelectedSubjects(newArr);
+		}
+	}, [selectedSubjects]);
 
 	return (
 		<div className={"chartWrapper"}>
 			<div className={"legend"}>
 				{subjects.map(subj => (
-					<div className={"legendElement"} key={subj}>
-						<div className={"colorBox"} style={{ background: SUBJECTS[subj] }}/>
-						<div className={"text"}>{subj}</div>
-					</div>
+					<button
+						className={`legendElement ${selectedSubjects.includes(subj) ? 'selected' : ''}`}
+						key={subj}
+						data-legend-subject={subj}
+						onClick={handleSelectSubj}
+					>
+						<div className={"colorBox"} data-legend-subject={subj} style={{ background: SUBJECTS[subj] }}/>
+						<div className={"text"} data-legend-subject={subj}>
+							{subj}
+						</div>
+					</button>
 				))}
 			</div>
 			<VictoryChart

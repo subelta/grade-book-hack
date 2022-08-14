@@ -8,7 +8,8 @@
 
 .legend {
     position: absolute;
-    top: 5px;
+    bottom: 5px;
+    z-index: 1000;
     width: calc(100vw - 340px - 80px);
     display: flex;
     justify-content: center;
@@ -17,8 +18,24 @@
 .legendElement {
     margin-right: 15px;
     display: flex;
-    height: 20px;
+    height: 32px;
+    cursor: pointer;
+    line-height: 32px;
     align-items: center;
+
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 0 8px;
+    background: transparent;
+}
+
+.legendElement:hover {
+    background: #f1dacb;
+}
+
+.legendElement.selected {
+    background: black;
+    color: #ffedda;
 }
 
 .colorBox {
