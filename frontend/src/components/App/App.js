@@ -20,26 +20,26 @@ export const App = () => {
 
     return (
         <div className={"container"}>
-            <header className={"header"}>
-                <h1 className={"heading"}>
-                    11"А"
-                </h1>
-                {/*tabs*/}
-            </header>
-            <main className={"main"}>
-                <ul className={"sidebar"}>
-                    {students.map((student, i) => (
-                        <li key={student.name}>
-                            <button data-student={student.name} className={"studentBtn"}>
-                                {student.name}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-                <div className={"chartWrapper"}>
+            <h1 className={"heading"}>
+                11"А"
+            </h1>
+            <nav className={"tabs"} />
+            <ul className={"sidebar"}>
+                {students.map((student, i) => (
+                    <li key={student.name}>
+                        <button
+                            className={`studentBtn ${currentStudent === student.name ? 'selected' : ''}`}
+                            data-student={student.name}
+                            onClick={handleClick}
+                        >
+                            {student.name}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+            <div className={"chartWrapper"}>
 
-                </div>
-            </main>
+            </div>
         </div>
     );
 }
