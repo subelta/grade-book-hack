@@ -27,13 +27,34 @@ export const App = () => {
 
     return (
         <div className={"container"}>
-            <h1 className={"heading"}>
-                11"А"
-            </h1>
+            <header>
+                <h1 className={"heading"}>
+                    11"А"
+                </h1>
+            </header>
 
             {!!students && (
                 <>
-                    <nav className={"tabs"} />
+                    <nav className={"tabs"}>
+                        <button className={"subjectBtn"}>
+                            Русский язык
+                        </button>
+                        <button className={"subjectBtn"}>
+                            Физика
+                        </button>
+                        <button className={"subjectBtn"}>
+                            Алгебра
+                        </button>
+                        <button className={"subjectBtn"}>
+                            Английский язык
+                        </button>
+                        <button className={"subjectBtn"}>
+                            Геометрия
+                        </button>
+                        <button className={"subjectBtn"}>
+                            Астрономия
+                        </button>
+                    </nav>
                     <ul className={"sidebar"}>
                         {students.map((student, i) => (
                             <li key={student.user}>
