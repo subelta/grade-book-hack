@@ -13,7 +13,18 @@ router = APIRouter(
 
 
 @router.post("/")
-def get_subjects(event: str, session: Session = Depends(get_session)):
+def create_event(event: str, session: Session = Depends(get_session)):
     event = crud.Event.add_event(session, event)
     return True
+
+
+@router.get("/")
+def get_events_polls(session: Session = Depends(get_session)):
+    events = crud.Event.get_events_polls(session)
+    if not events:
+        raise HTTPException(status_code=404, detail="Empty list")
+    return events
+
+
+
 

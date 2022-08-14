@@ -210,3 +210,21 @@ class Event:
         session.add(event)
         session.commit()
         return event
+
+    @staticmethod
+    def get_events_polls(session: Session):
+        pols = session.query(models.EventPoll).all()
+        events = session.query(models.Event.id, models.Event.title).all()
+        events_dict = dict([(e.id, e.title) for e in events])
+
+        data = dict()
+        for poll in pols:
+            event = events_dict[poll.event_id]
+            if event in data:
+                if poll.poll:
+                    data[event]["poll"].append(poll.poll)
+                if poll.text:
+                    data[event]["text"].append(poll.text)
+            else:
+                data[event] = {"poll": [], "text": []}
+        return data
