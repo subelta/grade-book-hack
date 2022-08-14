@@ -19,7 +19,7 @@ export const SubjectsChart = (props) => {
 		<div className={"chartWrapper"}>
 			<VictoryChart
 				style={{
-					parent: { height: "calc(100vh - 20px - 80px - 170px)", width: "1000px" }
+					parent: { height: "calc(100vh - 20px - 80px - 170px)", width: "100%" }
 				}}
 				containerComponent={
 					<VictoryZoomContainer
