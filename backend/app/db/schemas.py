@@ -29,4 +29,3 @@ class ViewLesson(BaseModel):
 
 class ViewLessons(ViewLesson):
     lessons: List[ViewLesson]
-

@@ -94,7 +94,7 @@ class Subject:
     @staticmethod
     def get_subject_list(session: Session):
         subjects = session.query(models.Lesson.classroom).distinct(models.Lesson.classroom).all()
-        return subjects
+        return [s[0] for s in subjects]
 
     @staticmethod
     def get_subject_homeworks(session: Session, classroom: str):
@@ -102,6 +102,14 @@ class Subject:
             models.Lesson.classroom == classroom
         ).all()
         return homeworks
+
+    @staticmethod
+    def get_subjects_details(session: Session):
+        subjects = Subject.get_subject_list(session)
+        data = dict()
+        for subject in subjects:
+            data[subject] = Subject.get_subject_homeworks(session, subject)
+        return data
 
     @staticmethod
     def get_student_subjects(session: Session, user_id: str):

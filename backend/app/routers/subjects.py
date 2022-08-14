@@ -20,6 +20,14 @@ def get_subjects(session: Session = Depends(get_session)):
     return subjects
 
 
+@router.get("/details")
+def get_subjects_details(session: Session = Depends(get_session)):
+    subjects = crud.Subject.get_subjects_details(session)
+    if not subjects:
+        raise HTTPException(status_code=404, detail="Empty list")
+    return subjects
+
+
 @router.get("/homeworks", response_model=List[schemas.ViewLesson])
 def get_subject_homeworks(classroom: str, session: Session = Depends(get_session)):
     homeworks = crud.Subject.get_subject_homeworks(session, classroom)
