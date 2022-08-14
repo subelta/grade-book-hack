@@ -28,3 +28,35 @@ class Lesson(Base):
     theme = Column(Text)
     home_work = Column(Text)
     created_at = Column(DateTime, default=dt.datetime.utcnow)
+
+
+class TgUser(Base):
+    __tablename__ = "tg_users"
+
+    chat_id = Column(BIGINT, primary_key=True)
+    first_name = Column(String(256))
+    username = Column(String(256))
+    is_bot = Column(Boolean)
+    last_name = Column(String)
+    language_code = Column(String(16))
+    created_at = Column(DateTime, default=dt.datetime.utcnow)
+
+
+class Event(Base):
+    __tablename__ = "events"
+
+    id = Column(BIGINT, primary_key=True, index=True)
+    title = Column(String(256), nullable=False)
+    description = Column(Text)
+    created_at = Column(DateTime, default=dt.datetime.utcnow)
+
+
+class EventPoll(Base):
+    __tablename__ = "event_polls"
+
+    id = Column(BIGINT, primary_key=True, index=True)
+    tg_id = Column(BIGINT)
+    event_id = Column(BIGINT)
+    poll = Column(Integer)
+    text = Column(Text)
+    created_at = Column(DateTime, default=dt.datetime.utcnow)

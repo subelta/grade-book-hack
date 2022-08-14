@@ -162,3 +162,51 @@ class Subject:
                 if len(recs) == 5:
                     return recs
         return recs
+
+
+class TgUser:
+    @staticmethod
+    def add_user(session: Session, chat_id, username, first_name, last_name, is_bot, language_code):
+        user = session.query(models.TgUser).filter(
+            models.TgUser.chat_id == chat_id
+        ).first()
+        if user:
+            return user
+        user = models.TgUser(
+            chat_id=chat_id,
+            first_name=first_name,
+            username=username,
+            is_bot=is_bot,
+            last_name=last_name,
+            language_code=language_code
+        )
+        session.add(user)
+        session.commit()
+        return user
+
+    @staticmethod
+    def add_poll(session: Session, chat_id, grade, comment):
+        event = session.query(models.Event).order_by(models.Event.id.desc()).first()
+        if not event:
+            return
+        poll = models.EventPoll(
+            tg_id=chat_id,
+            event_id=event.id,
+            poll=grade,
+            text=comment
+        )
+        session.add(poll)
+        session.commit()
+        return poll
+
+
+class Event:
+    @staticmethod
+    def add_event(session: Session, title: str):
+        event = models.Event(
+            title=title,
+            description=None
+        )
+        session.add(event)
+        session.commit()
+        return event

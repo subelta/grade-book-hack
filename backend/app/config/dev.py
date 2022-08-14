@@ -8,3 +8,6 @@ DB_NAME = "exodus"
 DB_USER = "exodus"
 DB_PSSWD = "31415926"
 SQLALCHEMY_DATABASE_URL = "postgresql://{}:{}@{}:{}/{}".format(DB_USER, quote_plus(DB_PSSWD), DB_HOST, DB_PORT, DB_NAME)
+
+# Tg Bot
+BOT_TOKEN = "5413720643:AAEedApojXIfVKxD06fb48aPCaXd-M24b7g"
