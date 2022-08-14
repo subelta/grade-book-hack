@@ -12,7 +12,7 @@ class Grade(Base):
 
     id = Column(BIGINT, primary_key=True, index=True)
     classroom = Column(String(64))
-    user_id = Column(String(16), index=True)
+    user_id = Column(String(128), index=True)
     date = Column(Date)
     grade = Column(Integer)
     is_absent = Column(Boolean, default=False)
