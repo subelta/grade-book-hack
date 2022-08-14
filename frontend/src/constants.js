@@ -1,5 +1,6 @@
 export const Endpoints = {
 	SUBJECTS_DATA: 'http://54.218.67.133/subjects/data',
+	DETAILS: 'http://54.218.67.133/subjects/details',
 	SUBJECTS: 'http://54.218.67.133/subjects',
 };
 

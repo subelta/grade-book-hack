@@ -5,7 +5,6 @@ import { SUBJECTS, Endpoints, subjectsDataMock } from '../../constants';
 import { StudentChart } from './StudentChart/StudentChart';
 
 export const App = () => {
-
     const [students, setStudents] = useState(null);
     const [currentStudent, setCurrentStudent] = useState('');
     const [tab, setTab] = useState(null);
@@ -17,12 +16,12 @@ export const App = () => {
               setStudents(data);
               setCurrentStudent(data[0].user);
           })
-    }, [])
+    }, []);
 
-    const handleClick = useCallback(e => {
+    const handleStudentClick = useCallback(e => {
         const student = e.target.getAttribute("data-student");
         setCurrentStudent(student);
-    }, [])
+    }, []);
 
     const handleTabClick = useCallback(e => {
         const subject = e.target.getAttribute("data-subject");
@@ -30,8 +29,12 @@ export const App = () => {
             setTab(null);
         } else {
             setTab(subject);
+            fetch(Endpoints.DETAILS)
+                .then(resp => resp.json())
+                .then(console.log);
         }
-    }, [tab])
+    }, [tab]);
+
     console.log(students);
 
     const subjects = Object.keys(SUBJECTS);
@@ -65,7 +68,7 @@ export const App = () => {
                                     <button
                                         className={`studentBtn ${currentStudent === student.user ? 'selected' : ''}`}
                                         data-student={student.user}
-                                        onClick={handleClick}
+                                        onClick={handleStudentClick}
                                     >
                                         {student.user}
                                     </button>

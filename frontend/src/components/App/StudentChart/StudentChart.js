@@ -1,5 +1,3 @@
-// STFU BITCH YOU MOTHERFUCKING SHIT
-// noinspection JSValidateTypes
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { VictoryAxis, VictoryChart, VictoryLine, VictoryScatter, VictoryZoomContainer } from 'victory';
 
@@ -30,6 +28,7 @@ export const StudentChart = (props) => {
 				}
 			>
 				<VictoryAxis
+					domain={[1.5, 5.5]}
 					dependentAxis
 				/>
 				<VictoryAxis
