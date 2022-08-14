@@ -1,11 +1,9 @@
 // STFU BITCH YOU MOTHERFUCKING SHIT
 // noinspection JSValidateTypes
 
-import { Fragment } from 'react';
 import { VictoryChart, VictoryLine, VictoryScatter } from 'victory';
 
 import { COLORS } from '../../../constants';
-import { ScatterLine } from './ScatterLine/ScatterLine';
 
 export const SubjectsChart = (props) => {
 	const { currentStudent, students } = props;
@@ -16,9 +14,8 @@ export const SubjectsChart = (props) => {
 				.find(el => el.name === currentStudent)
 				.subjects
 				.map(subject => (
-					<ScatterLine
+					<VictoryLine
 						key={subject.subjectName}
-						subject={subject}
 						data={subject.dates.map(day => (
 							{
 								x: new Date(day.date),
@@ -32,6 +29,24 @@ export const SubjectsChart = (props) => {
 							},
 							labels: { fill: COLORS[subject.subjectName] }
 						}}
+					/>
+				))
+			}
+
+			{students
+				.find(el => el.name === currentStudent)
+				.subjects
+				.map(subject => (
+					<VictoryScatter
+						key={subject.subjectName}
+						data={subject.dates.map(day => (
+							{
+								x: new Date(day.date),
+								y: day.grades[day.grades.length - 1] || null
+							}
+						))}
+						size={3}
+						style={{ data: { fill: COLORS[subject.subjectName] } }}
 					/>
 				))
 			}
